@@ -18,7 +18,7 @@ write_api = client.write_api(write_options=WriteOptions(batch_size=1))
 def simulate_sensor_data():
 	while True:
 		# Generate random sensor values
-		vibration = random.uniform(0.1, 10.0)  # Example: vibration in m/s²
+		vibration = random.uniform(0.1, 10.0)  # Vibration in m/s²
 		moisture = random.uniform(30.0, 50.0)  # Moisture percentage
 		screw_speed = random.uniform(100, 500)  # Screw speed in RPM
 		drum_speed = random.uniform(50, 300)  # Drum speed in RPM
