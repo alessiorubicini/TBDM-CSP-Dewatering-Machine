@@ -57,8 +57,8 @@ def process_csv_to_line_protocol(input_file, output_file):
                 outfile.write(f"machine_data,{tags} {fields_str} {timestamp}\n")
 
 # Input and output file names
-input_file = 'datasets/dati_macchina.csv'
-output_file = 'data/machine_data.lp'
+input_file = 'data-csv/dati_macchina.csv'
+output_file = 'data-lp/machine_data.lp'
 
 # Call the function to process the CSV and create the new line protocol file
 process_csv_to_line_protocol(input_file, output_file)

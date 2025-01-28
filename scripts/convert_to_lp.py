@@ -4,8 +4,8 @@ import csv
 import os
 from datetime import datetime
 
-csv_directory = 'datasets'
-output_directory = 'data'
+csv_directory = 'data-csv'
+output_directory = 'data-lp'
 
 csv_files = [
 	'umidita_fango.csv', 
