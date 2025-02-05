@@ -53,7 +53,7 @@ def simulate_sensor_data():
 			.time(timestamp)
 		)
 		
-		write_api.write(bucket=bucket, org=org, record=point)
+		#write_api.write(bucket=bucket, org=org, record=point)
 
 		# Print for verification (optional)
 		print(f"{timestamp}: {point}")
