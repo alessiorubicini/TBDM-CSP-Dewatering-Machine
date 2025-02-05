@@ -10,6 +10,7 @@ The objective is to study the tools, what features it offers, data map visualiza
 - Python 3.8 or higher
 - Docker (for containerized deployment)
 - Pip (Python package installer)
+- InfluxDB CLI
 
 ## Datasets
 The datasets provided for the project are located in the [data-csv](data-csv) (CSV format versions) and [data-lp](data-lp) folders (Line Protocol format versions).
@@ -61,18 +62,46 @@ docker-compose up
 
 ## InfluxDB
 
-### Bucket Initialization
-To create a new bucket in InfluxDB, follow these steps:
+### Influx Configuration
+
+To interact with InfluxDB, you need to configure the CLI with the organization, bucket, and authentication token.
 1. Open InfluxDB in your web browser by navigating to `http://localhost:8086`.
-2. Log in with your credentials (username: `admin`, password: `admin123`).
-3. Go to **Load Data** > **Buckets** > **Create Bucket**.
-5. Enter the bucket name (for example `dewatering_machine_live`) and Set the retention period as needed
+2. Set up an initial organization (Unicam) and bucket (dewatering-machine)
+3. Copy the admin token that appears after setup. Alternately, go to **Load Data** > **API Tokens** > **Generate API Token** > **All Access Token** and create a new token.
 
-![InfluxDB Buckets](docs/influx-buckets.png)
+Then configure CLI with credentials:
+```sh
+influx config create \
+  --config-name my-config \
+  --host http://localhost:8086 \
+  --org Unicam \
+  --token YOUR_ADMIN_TOKEN \
+  --active
+```
 
-To create a new API token for accessing the bucket:
-1. Go to **Load Data** > **API Tokens** > **Generate API Token** > **All Access Token**
-2. Enter the token name and click Save
+Verify the configuration with:
+```sh
+influx config list
+```
+
+If you need to create a new bucket manually via CLI:
+```sh
+influx bucket create \
+  --name dewatering-machine \
+  --org Unicam \
+  --retention 0  # 0 means infinite retention
+```
+
+Verify the bucket creation with:
+```sh
+influx bucket list
+```
+
+### Data Ingestion
+Now, ingest the .lp datasets using CLI:
+```sh
+influx write --bucket dewatering-machine --file data/*.lp
+```
 
 ### Data Analytics Queries
 
@@ -82,7 +111,7 @@ To create a new API token for accessing the bucket:
 
 ### Connection to InfluxDB
 To connect Grafana to InfluxDB, follow these steps:
-1. Open Grafana in your web browser by navigating to `http://localhost:3000`.
+1. Open Grafana in your web browser by navigating to `http://grafana:3000`.
 2. Log in with the default credentials (username: `admin`, password: `admin123`).
 3. Go to **Configuration** > **Data Sources**.
 4. Click **Add data source** and select **InfluxDB**.
@@ -90,28 +119,35 @@ To connect Grafana to InfluxDB, follow these steps:
    - **Query Language**: `Flux`
    - **URL**: `http://influxdb:8086`
    - **Organization**: `Unicam`
-   - **Token**: the one from InfluxDB
+   - **Token**: YOUR_ADMIN_TOKEN
    - **Default Bucket**: `dewatering_machine`
 6. Click **Save & Test** to verify the connection.
 
-### Historical Dashboards
+### Dashboards
+Grafana dashboards are interactive visualizations that allow you to monitor and analyze your data in real-time. They consist of various panels, each displaying a specific metric or set of metrics from your data sources.
+
+#### Historical Dashboards
 Historical dashboards allow you to visualize and analyze past data.
 
 ![Historical Dashboards](docs/historical-dashboards.png)
 
 
-### Comparison Dashboards
-
+#### Comparison Dashboards
 ![Comparison Dashboards](docs/comparison-dashboard.png)
 
-### Geographical Dashboards
+#### Geographical Dashboards
 Geographical dashboards provide a spatial view of your data. 
 
 ![Geographical Dashboards](docs/geographical-dashboard.png)
 
+> ⚠ All dashboards are located in the [dashboards](dashboards/) folder as JSON files that can be imported into Grafana.
+
 ### Alerts
+Grafana alerts allow you to monitor your data and receive notifications when certain conditions are met. You can set up alert rules based on your queries, and Grafana will continuously evaluate these rules. When the conditions of an alert rule are satisfied, Grafana can send notifications through various channels such as email, Slack, or custom webhooks.
 
 
+
+![Grafana Alerts](docs/grafana-alerts.png)
 
 ## Scripts
 Some Python scripts have been arranged for differen purposes:
@@ -119,6 +155,11 @@ Some Python scripts have been arranged for differen purposes:
 - [convert_machine_data.py](scripts/convert_machine_data.py) converts CSV dataset [dati_macchina.csv](data-csv/dati_macchina.csv) to InfluxDB Line Protocol format.
 - [iot_simulator.py](scripts/iot_simulator.py) simulates constant sensor data with slight variations and occasional anomalies, and writes it to InfluxDB.
 - [simulator.py](scripts/simulator.py) simulates constant sensor data with drift and anomalies, and writes it to InfluxDB.
+
+To use the Python scripts in this project, you must navigate to the project directory and activate the virtual environment:
+```sh
+source venv/bin/activate
+```
 
 ## Authors
 The project was developed as part of the exam of Technologies for Big Data Management at the University of Camerino by the students Alessio Rubicini, Daniele Monaldi and Alessio Cinti, under the supervision of professor Massimo Callisto De Donato.
