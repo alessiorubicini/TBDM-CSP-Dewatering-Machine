@@ -161,5 +161,10 @@ To use the Python scripts in this project, you must navigate to the project dire
 source venv/bin/activate
 ```
 
+Then install the required PiP requirements:
+```sh
+pip install -r scripts/requirements.txt
+```
+
 ## Authors
 The project was developed as part of the exam of Technologies for Big Data Management at the University of Camerino by the students Alessio Rubicini, Daniele Monaldi and Alessio Cinti, under the supervision of professor Massimo Callisto De Donato.
