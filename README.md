@@ -26,39 +26,85 @@ The datasets are the following:
 
 ## Docker Compose
 
-The Docker Compose configuration sets up an InfluxDB 2.7.11 and Grafana stack for time-series data storage and visualization:
-- the **InfluxDB** service runs in a container named influxdb_v2, exposing port 8086 and initializing with an admin user and password. Its data is persisted using a named volume
-	```docker
-	influxdb:
-		image: influxdb:2.7.11
-		container_name: influxdb_v2
-		ports:
-			- "8086:8086"
-		environment:
-			- DOCKER_INFLUXDB_INIT_USERNAME=admin
-			- DOCKER_INFLUXDB_INIT_PASSWORD=admin123
-		volumes:
-			- influxdb2_data:/var/lib/influxdb2
-	```
-- the **Grafana** service runs in a separate container, exposing port 3000, and is preconfigured with admin credentials. Grafana’s data is also stored in a persistent volume.
-This setup provides an easy-to-deploy monitoring stack with InfluxDB for data collection and Grafana for dashboard visualization.
-	```docker
-	grafana:
-    	image: grafana/grafana:latest
-    	container_name: grafana
-    	ports:
-      		- "3000:3000"
-    	environment:
-      		- GF_SECURITY_ADMIN_USER=admin
-      		- GF_SECURITY_ADMIN_PASSWORD=admin123
-    	volumes:
-      		- grafana_data:/var/lib/grafana
-	```
 
-You can build and run the [docker compose](docker-compose.yml) with:
+This project provides a **Docker Compose** environment for managing a data monitoring and streaming architecture using **InfluxDB**, **Grafana**, **Kafka**, and related components.
+
+## Included Services
+
+### 1. InfluxDB
+InfluxDB is an open-source time-series database designed to store and query large amounts of time-stamped data.
+
+- **Image:** `influxdb:2.7.11`
+- **Exposed Port:** `8086`
+- **Initial Credentials:**
+  - **Username:** `admin`
+  - **Password:** `admin123`
+- **Mounted Volume:** `influxdb2_data` → `/var/lib/influxdb2`
+
+### 2. Grafana
+Grafana is a data visualization platform that allows users to create interactive dashboards.
+
+- **Image:** `grafana/grafana:latest`
+- **Exposed Port:** `3000`
+- **Initial Credentials:**
+  - **Username:** `admin`
+  - **Password:** `admin123`
+- **Mounted Volume:** `grafana_data` → `/var/lib/grafana`
+
+### 3. Zookeeper
+Zookeeper is a distributed coordination service used for managing Kafka.
+
+- **Image:** `confluentinc/cp-zookeeper:latest`
+- **Exposed Port:** `2181`
+- **Configuration:**
+  - `ZOOKEEPER_CLIENT_PORT=2181`
+  - `ZOOKEEPER_TICK_TIME=2000`
+
+### 4. Kafka
+Apache Kafka is a distributed streaming platform for managing real-time data flows.
+
+- **Image:** `confluentinc/cp-kafka:latest`
+- **Exposed Ports:** `9092` (public), `29092` (internal to Docker)
+- **Configuration:**
+  - Broker ID: `1`
+  - Connected to Zookeeper
+  - Configured listeners for internal and external communications
+- **Mounted Volume:** `kafka_data` → `/var/lib/kafka`
+
+### 5. Kafka UI
+Kafka UI is a graphical interface for monitoring and managing Kafka clusters.
+
+- **Image:** `provectuslabs/kafka-ui:latest`
+- **Exposed Port:** `7777`
+- **Configuration:**
+  - Cluster Name: `local-cluster`
+  - Connected to Kafka (`kafka:29092`)
+  - Connected to Zookeeper (`zookeeper:2181`)
+
+## Used Volumes
+
+- `influxdb2_data`: Stores InfluxDB data
+- `grafana_data`: Stores Grafana data
+- `kafka_data`: Stores Kafka data
+- `kafka_connect_data`: Stores Kafka Connect data
+
+## Running the Project
+
+To start the entire stack, run:
+```sh
+docker-compose up -d
 ```
-docker-compose up
+
+To stop and remove the containers:
+```sh
+docker-compose down
 ```
+
+## Accessing Services
+
+- **InfluxDB:** [http://localhost:8086](http://localhost:8086)
+- **Grafana:** [http://localhost:3000](http://localhost:3000) (Credentials: `admin/admin123`)
+- **Kafka UI:** [http://localhost:7777](http://localhost:7777)
 
 ## InfluxDB
 
