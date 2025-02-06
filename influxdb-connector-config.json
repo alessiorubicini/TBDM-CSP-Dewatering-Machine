@@ -3,12 +3,12 @@
     "config": {
         "connector.class": "io.confluent.influxdb.InfluxDBSinkConnector",
         "tasks.max": "1",
-        "topics": "dewatering-machine",
-        "influxdb.url": "http://192.168.1.12:8086",
-        "influxdb.token": "-bBx3cUVeDN1WhP-rflm2f9SChf7PtJinYg6V_dPfugego6DcwtTluy8awcukLBliR5tXJDAUA8PCQpYbl7DNQ==",
-        "influxdb.org": "unicam",
-        "influxdb.bucket": "dewatering-machine",
-        "influxdb.measurement": "kafka_data",
+        "topics": "dewatering_machine",
+        "influxdb.url": "http://192.168.1.114:8086",
+        "influxdb.token": "GpEfNAYwCGAN3Clv6sqFcL88ySgOyAoEjkpYdiEIrNKfvFg75_phdl0dL8UmkUu2WInergEK5ldKLpgd7MqI3g==",
+        "influxdb.org": "Unicam",
+        "influxdb.bucket": "machine",
+        "influxdb.measurement": "machine_data",
         "influxdb.ssl.enabled": "false",
         "influxdb.timeColumn": "timestamp"
     }

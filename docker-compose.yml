@@ -76,6 +76,7 @@ services:
       - kafka_connect_data:/var/lib/kafka-connect
       - /usr/share/confluent-hub-components:/usr/share/confluent-hub-components
       - ./data-lp:/data-lp
+      - ./influxdb-connector:/usr/share/java/influxdb-connector
 
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
