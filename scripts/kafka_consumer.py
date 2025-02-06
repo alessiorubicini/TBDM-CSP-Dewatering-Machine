@@ -10,9 +10,9 @@ GROUP_ID = 'dewatering-group'
 
 # InfluxDB configuration
 INFLUXDB_URL = 'http://influxdb:8086'
-INFLUXDB_TOKEN = 'omwIAYPdPo6T7k1VMMwO8OevYJmQ8Tj3xMYijRP7dkGz9FMxCJQB8VWsQnl5CAYxT99tn32CJV5zTJmOGx-9xQ=='
+INFLUXDB_TOKEN = 'ZN-MFXbf0RbQwGEFKYzOEd8DsotqAez6NX0hjvKi0WzISYb95XNeSRH97vtV_1JpK_JZri7p6cI7TdxGijU0cA=='
 INFLUXDB_ORG = 'Unicam'
-INFLUXDB_BUCKET = 'dewatering_machine'
+INFLUXDB_BUCKET = 'dewatering-machine'
 
 # Create a Kafka consumer instance
 consumer = Consumer({
