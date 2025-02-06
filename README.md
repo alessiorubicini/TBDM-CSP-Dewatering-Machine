@@ -210,13 +210,13 @@ Grafana alerts allow you to monitor your data and receive notifications when cer
 ![Grafana Alerts](docs/grafana-alerts.png)
 
 ## Scripts
-Some Python scripts have been arranged for differen purposes:
+Some Python scripts have been arranged for different purposes:
 - [convert_to_lp.py](scripts/convert_to_lp.py): converts CSV datasets to InfluxDB Line Protocol format.
-- [convert_machine_data.py](scripts/convert_machine_data.py) converts CSV dataset [dati_macchina.csv](data-csv/dati_macchina.csv) to InfluxDB Line Protocol format.
-- [iot_simulator.py](scripts/iot_simulator.py) simulates constant sensor data with slight variations and occasional anomalies, and writes it to InfluxDB.
-- [simulator.py](scripts/simulator.py) simulates constant sensor data with drift and anomalies, and writes it to InfluxDB.
-- [kafka_producer](scripts/kafka_producer) simulates constant sensor data with slight variations and occasional anomalies, and writes it to Kafka topic.
-- [kafka_consumer](scripts/kafka_consumer) 
+- [convert_machine_data.py](scripts/convert_machine_data.py): converts CSV dataset [dati_macchina.csv](data-csv/dati_macchina.csv) to InfluxDB Line Protocol format.
+- [iot_simulator.py](scripts/iot_simulator.py): simulates constant sensor data with slight variations and occasional anomalies, and writes it to InfluxDB.
+- [simulator.py](scripts/simulator.py): simulates constant sensor data with drift and anomalies, and writes it to InfluxDB.
+- [kafka_producer](scripts/kafka_producer): simulates constant sensor data with slight variations and occasional anomalies, and writes it to Kafka topic.
+- [kafka_consumer](scripts/kafka_consumer): reads the files from Kafka topic and insert them into InfluxDB bucket.
 
 To use the Python scripts in this project, you must navigate to the project directory and activate the virtual environment:
 ```sh
