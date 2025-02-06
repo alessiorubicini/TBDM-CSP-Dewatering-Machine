@@ -1,15 +1,17 @@
 {
-    "name": "influxdb-sink",
-    "config": {
-        "connector.class": "io.confluent.influxdb.InfluxDBSinkConnector",
-        "tasks.max": "1",
-        "topics": "dewatering_machine",
-        "influxdb.url": "http://192.168.1.114:8086",
-        "influxdb.token": "GpEfNAYwCGAN3Clv6sqFcL88ySgOyAoEjkpYdiEIrNKfvFg75_phdl0dL8UmkUu2WInergEK5ldKLpgd7MqI3g==",
-        "influxdb.org": "Unicam",
-        "influxdb.bucket": "machine",
-        "influxdb.measurement": "machine_data",
-        "influxdb.ssl.enabled": "false",
-        "influxdb.timeColumn": "timestamp"
-    }
+	"name": "influxdb-sink",
+	"config": {
+		"connector.class": "io.confluent.influxdb.InfluxDBSinkConnector",
+		"tasks.max": "1",
+		"topics": "dewatering_machine",
+		"influxdb.url": "http://influxdb:8086",
+		"influxdb.org": "Unicam",
+		"influxdb.bucket": "machine",
+		"influxdb.token": "GpEfNAYwCGAN3Clv6sqFcL88ySgOyAoEjkpYdiEIrNKfvFg75_phdl0dL8UmkUu2WInergEK5ldKLpgd7MqI3g==",
+		"influxdb.measurement": "machine_data",
+		"value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "value.converter.schemas.enable": "false",
+        "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+        "key.converter.schemas.enable": "false"
+	}
 }
