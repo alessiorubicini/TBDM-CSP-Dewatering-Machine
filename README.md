@@ -6,6 +6,9 @@ The project revolves around analyzing and optimizing data from a dewatering mach
 
 The objective is to study the tools, what features it offers, data map visualization, monitoring and alarm dashboards, AI tool integration. In particular, investigate influx V3 with comparison to the V2 version (performance, flux/sql hook language), integration API in real operational contexts (use of C#, Java, RESTAPI), limitations encountered.
 
+### Project Structure
+![Project Structure](docs/architecture.png)
+
 ## System Requirements
 - Python 3.8 or higher
 - Docker (for containerized deployment)
@@ -26,10 +29,7 @@ The datasets are the following:
 
 ## Docker Compose
 
-
 This project provides a **Docker Compose** environment for managing a data monitoring and streaming architecture using **InfluxDB**, **Grafana**, **Kafka**, and related components.
-
-## Included Services
 
 ### 1. InfluxDB
 InfluxDB is an open-source time-series database designed to store and query large amounts of time-stamped data.
@@ -86,7 +86,6 @@ Kafka UI is a graphical interface for monitoring and managing Kafka clusters.
 - `influxdb2_data`: Stores InfluxDB data
 - `grafana_data`: Stores Grafana data
 - `kafka_data`: Stores Kafka data
-- `kafka_connect_data`: Stores Kafka Connect data
 
 ## Running the Project
 
@@ -105,6 +104,21 @@ docker-compose down
 - **InfluxDB:** [http://localhost:8086](http://localhost:8086)
 - **Grafana:** [http://localhost:3000](http://localhost:3000) (Credentials: `admin/admin123`)
 - **Kafka UI:** [http://localhost:7777](http://localhost:7777)
+
+## Kafka Streaming Data
+
+### Kafka Topic Management
+
+Create a Topic named dewatering-machine, running:
+```sh
+docker-compose exec kafka /bin/bash -c "kafka-topics --create --topic dewatering-machine --partitions 1 --replication-factor 1 --bootstrap-server localhost:9092"
+```
+
+### Testing with a Consumer
+To debug and print real-time data from the topic:
+```sh
+docker-compose exec kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic dewatering-machine --from-beginning --timeout-ms 5000
+```
 
 ## InfluxDB
 
@@ -201,6 +215,8 @@ Some Python scripts have been arranged for differen purposes:
 - [convert_machine_data.py](scripts/convert_machine_data.py) converts CSV dataset [dati_macchina.csv](data-csv/dati_macchina.csv) to InfluxDB Line Protocol format.
 - [iot_simulator.py](scripts/iot_simulator.py) simulates constant sensor data with slight variations and occasional anomalies, and writes it to InfluxDB.
 - [simulator.py](scripts/simulator.py) simulates constant sensor data with drift and anomalies, and writes it to InfluxDB.
+- [kafka_producer](scripts/kafka_producer) simulates constant sensor data with slight variations and occasional anomalies, and writes it to Kafka topic.
+- [kafka_consumer](scripts/kafka_consumer) 
 
 To use the Python scripts in this project, you must navigate to the project directory and activate the virtual environment:
 ```sh
