@@ -65,7 +65,7 @@ docker-compose up
 ### Influx Configuration
 
 To interact with InfluxDB, you need to configure the CLI with the organization, bucket, and authentication token.
-1. Open InfluxDB in your web browser by navigating to `http://localhost:8086`.
+1. Open InfluxDB in your web browser by navigating to `http://influxdb:8086`.
 2. Set up an initial organization (Unicam) and bucket (dewatering-machine)
 3. Copy the admin token that appears after setup. Alternately, go to **Load Data** > **API Tokens** > **Generate API Token** > **All Access Token** and create a new token.
 
@@ -73,7 +73,7 @@ Then configure CLI with credentials:
 ```sh
 influx config create \
   --config-name my-config \
-  --host http://localhost:8086 \
+  --host http://influxdb:8086 \
   --org Unicam \
   --token YOUR_ADMIN_TOKEN \
   --active
@@ -119,12 +119,14 @@ To connect Grafana to InfluxDB, follow these steps:
    - **Query Language**: `Flux`
    - **URL**: `http://influxdb:8086`
    - **Organization**: `Unicam`
-   - **Token**: YOUR_ADMIN_TOKEN
+   - **Token**: `YOUR_ADMIN_TOKEN`
    - **Default Bucket**: `dewatering_machine`
 6. Click **Save & Test** to verify the connection.
 
 ### Dashboards
 Grafana dashboards are interactive visualizations that allow you to monitor and analyze your data in real-time. They consist of various panels, each displaying a specific metric or set of metrics from your data sources.
+
+> ⚠ All dashboards are located in the [dashboards](dashboards/) folder as JSON files that can be imported into Grafana.
 
 #### Historical Dashboards
 Historical dashboards allow you to visualize and analyze past data.
@@ -139,8 +141,6 @@ Historical dashboards allow you to visualize and analyze past data.
 Geographical dashboards provide a spatial view of your data. 
 
 ![Geographical Dashboards](docs/geographical-dashboard.png)
-
-> ⚠ All dashboards are located in the [dashboards](dashboards/) folder as JSON files that can be imported into Grafana.
 
 ### Alerts
 Grafana alerts allow you to monitor your data and receive notifications when certain conditions are met. You can set up alert rules based on your queries, and Grafana will continuously evaluate these rules. When the conditions of an alert rule are satisfied, Grafana can send notifications through various channels such as email, Slack, or custom webhooks.

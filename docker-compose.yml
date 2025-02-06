@@ -73,10 +73,6 @@ services:
       CONNECT_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
       CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
     volumes:
-      - kafka_connect_data:/var/lib/kafka-connect
-      - /usr/share/confluent-hub-components:/usr/share/confluent-hub-components
-      - ./data-lp:/data-lp
-      - ./influxdb-connector:/usr/share/java/influxdb-connector
       - ./confluent-hub-components:/usr/share/confluent-hub-components
 
   kafka-ui:
