@@ -4,10 +4,10 @@ from confluent_kafka import Producer
 import json
 
 # Kafka broker and topic configuration
-KAFKA_BROKER = 'kafka:9092'  # Kafka broker URL (in Docker setup)
-TOPIC = 'dewatering-machine'  # Kafka topic to send data to
+KAFKA_BROKER = 'kafka:9092'
+TOPIC = 'dewatering-machine'
 
-# Callback function to handle delivery reports (success or error)
+# Callback function to handle delivery reports
 def delivery_report(err, msg):
     if err is not None:
         print(f'Error sending message: {err}')
