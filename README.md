@@ -7,7 +7,7 @@ The project revolves around analyzing and optimizing data from a dewatering mach
 The objective is to study the tools, what features it offers, data map visualization, monitoring and alarm dashboards, AI tool integration. In particular, investigate influx V3 with comparison to the V2 version (performance, flux/sql hook language), integration API in real operational contexts (use of C#, Java, RESTAPI), limitations encountered.
 
 ### Project Structure
-![Project Structure](docs/architecture.png)
+![Project Structure](.github/architecture.png)
 
 ## System Requirements
 - Python 3.8 or higher
@@ -191,23 +191,23 @@ Grafana dashboards are interactive visualizations that allow you to monitor and 
 #### Historical Dashboards
 Historical dashboards allow you to visualize and analyze past data.
 
-![Historical Dashboards](docs/historical-dashboards.png)
+![Historical Dashboards](.github/historical-dashboards.png)
 
 
 #### Comparison Dashboards
-![Comparison Dashboards](docs/comparison-dashboard.png)
+![Comparison Dashboards](.github/comparison-dashboard.png)
 
 #### Geographical Dashboards
 Geographical dashboards provide a spatial view of your data. 
 
-![Geographical Dashboards](docs/geographical-dashboard.png)
+![Geographical Dashboards](.github/geographical-dashboard.png)
 
 ### Alerts
 Grafana alerts allow you to monitor your data and receive notifications when certain conditions are met. You can set up alert rules based on your queries, and Grafana will continuously evaluate these rules. When the conditions of an alert rule are satisfied, Grafana can send notifications through various channels such as email, Slack, or custom webhooks.
 
 
 
-![Grafana Alerts](docs/grafana-alerts.png)
+![Grafana Alerts](.github/grafana-alerts.png)
 
 ## Scripts
 Some Python scripts have been arranged for different purposes:
