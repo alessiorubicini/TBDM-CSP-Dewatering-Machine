@@ -113,14 +113,18 @@ docker-compose down
 
 Create a Topic named dewatering-machine, running:
 ```sh
-docker-compose exec kafka /bin/bash -c "kafka-topics --create --topic dewatering-machine --partitions 1 --replication-factor 1 --bootstrap-server localhost:9092"
+docker-compose exec kafka /bin/bash -c "kafka-topics --create --topic dewatering-machine-live --partitions 1 --replication-factor 1 --bootstrap-server localhost:9092"
 ```
+
+![Kafka Topic on Kafka UI](.github/kafka-topic.png)
 
 ### Testing with a Consumer
 To debug and print real-time data from the topic:
 ```sh
 docker-compose exec kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic dewatering-machine --from-beginning --timeout-ms 5000
 ```
+
+![List of messages in topic in Kafka UI](.github/kafka-messages.png)
 
 ## InfluxDB
 

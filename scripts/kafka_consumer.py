@@ -4,15 +4,15 @@ from influxdb_client import InfluxDBClient, Point
 import time
 
 # Kafka configuration
-KAFKA_BROKER = 'kafka:9092'
-TOPIC = 'dewatering-machine'
+KAFKA_BROKER = 'localhost:9092'
+TOPIC = 'dewatering-machine-live'
 GROUP_ID = 'dewatering-group'
 
 # InfluxDB configuration
-INFLUXDB_URL = 'http://influxdb:8086'
-INFLUXDB_TOKEN = 'ZN-MFXbf0RbQwGEFKYzOEd8DsotqAez6NX0hjvKi0WzISYb95XNeSRH97vtV_1JpK_JZri7p6cI7TdxGijU0cA=='
+INFLUXDB_URL = 'http://localhost:8086'
+INFLUXDB_TOKEN = 'GpEfNAYwCGAN3Clv6sqFcL88ySgOyAoEjkpYdiEIrNKfvFg75_phdl0dL8UmkUu2WInergEK5ldKLpgd7MqI3g=='
 INFLUXDB_ORG = 'Unicam'
-INFLUXDB_BUCKET = 'dewatering-machine'
+INFLUXDB_BUCKET = 'dewatering-machine-live'
 
 # Create a Kafka consumer instance
 consumer = Consumer({
