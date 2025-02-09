@@ -165,6 +165,8 @@ influx write --bucket dewatering-machine --file data/*.lp
 
 ### Data Analytics Queries
 
+All data analytics queries, with their description and performance, are described in detail in [Data Analytics Queries](docs/data-analytics-queries.md). You can also find a detailed comparison of Flux and SQL query languages in [Flux vs SQL](docs/flux-vs-sql.md).
+
 
 ## Grafana
 
