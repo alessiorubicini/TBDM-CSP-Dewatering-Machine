@@ -4,7 +4,7 @@ The project revolves around analyzing and optimizing data from a dewatering mach
 
 ### Objectives
 
-The objective is to study the tools, what features it offers, data map visualization, monitoring and alarm dashboards, AI tool integration. In particular, investigate influx V3 with comparison to the V2 version (performance, flux/sql hook language), integration API in real operational contexts (use of C#, Java, RESTAPI), limitations encountered.
+The objective is to study the tools, what features it offers, data map visualization, monitoring and alarm dashboards. In particular, investigate influx V3 with comparison to the V2 version (performance, flux/sql hook language), integration API in real operational contexts (use of C#, Java, RESTAPI, Python), limitations encountered.
 
 ### Project Structure
 ![Project Structure](.github/architecture.png)
@@ -40,6 +40,8 @@ InfluxDB is an open-source time-series database designed to store and query larg
   - **Username:** `admin`
   - **Password:** `admin123`
 - **Mounted Volume:** `influxdb2_data` → `/var/lib/influxdb2`
+
+For this project, we used InfluxDB V2. InfluxData is developing a new version, V3, which is currently in development. The difference between V2 and V3 is in [InfluxDB: V2 vs V3](docs/influxdb-v2-vs-v3.md).
 
 ### 2. Grafana
 Grafana is a data visualization platform that allows users to create interactive dashboards.
@@ -207,9 +209,9 @@ Geographical dashboards provide a spatial view of your data.
 ### Alerts
 Grafana alerts allow you to monitor your data and receive notifications when certain conditions are met. You can set up alert rules based on your queries, and Grafana will continuously evaluate these rules. When the conditions of an alert rule are satisfied, Grafana can send notifications through various channels such as email, Slack, or custom webhooks.
 
+For convenience, we used Discord as our contact point.
 
-
-![Grafana Alerts](.github/grafana-alerts.png)
+![Grafana Alerts](.github/discord-alert.png)
 
 ## Scripts
 Some Python scripts have been arranged for different purposes:
