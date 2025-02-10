@@ -119,6 +119,13 @@ docker-compose exec kafka /bin/bash -c "kafka-topics --create --topic dewatering
 ![Kafka Topic on Kafka UI](.github/kafka-topic.png)
 
 ### Testing with a Consumer
+To start real-time data simulation (producer) and consumer, run the Python scripts (in two separate terminals):
+```sh
+source venv/bin/activate
+python scripts/kafka_producer.py
+python scripts/kafka_consumer.py
+```
+
 To debug and print real-time data from the topic:
 ```sh
 docker-compose exec kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic dewatering-machine --from-beginning --timeout-ms 5000
@@ -171,7 +178,8 @@ influx write --bucket dewatering-machine --file data/*.lp
 
 ### Data Analytics Queries
 
-All data analytics queries, with their description and performance, are described in detail in [Data Analytics Queries](docs/data-analytics-queries.md). You can also find a detailed comparison of Flux and SQL query languages in [Flux vs SQL](docs/flux-vs-sql.md).
+All data analytics queries, with their description and performance, are described in detail in [Data Analytics Queries](docs/data-analytics-queries.md). 
+You can also find a detailed comparison of Flux and SQL query languages in [Flux vs SQL](docs/flux-vs-sql.md) and a comparison between Influx V2 and V3 in [InfluxDB V2 vs V3](docs/influxdb-v2-vs-v3.md).
 
 
 ## Grafana
